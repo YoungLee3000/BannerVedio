@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片轮播</title>
+    <script src="js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+  	<style>
+		html,body{width:100%;height:100%;margin:0}
+
+		.img
+		{
+			-webkit-transform: scale(1.2);
+			-ms-transform: scale(1.2);
+			transform: scale(1.2);
+
+		}
+		.active .img
+		{
+			-webkit-transform: scale(1);
+			-ms-transform: scale(1);
+			transform: scale(1);
+			-webkit-transition: -webkit-transform 2s linear 0s;
+			transition: transform 2s linear 0s;
+		}
+		#outer
+		{
+    		text-align:center;
+    		width:800px;
+    		height:400px;
+    		position: relative;
+    		overflow: hidden;
+		}
+
+		#inner img{
+    		width:800px;
+    		height:400px;
+		}
+		#video_btn {
+			position: absolute;
+			left: 0;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			margin: auto;
+		}
+	</style>
+        
+</head>
+ 
+<body>
+    <div id="outer">
+    	<img src="images/1.jpg" id="inner" class="img">
+    	<div id="video_btn">
+			<img src="images/playerBtn.png" />
+		</div>
+	</div>
+    <script>
+    	var imgGroup = new Array("images/1.jpg","images/2.jpg","images/3.jpg","images/4.jpg");
+    	var imgObj = document.getElementById('inner');
+    	var outerObj = document.getElementById('outer');
+    	var count = 0;
+    	function beginPlay(){
+    		$("#video_btn").hide();
+    		outerObj.className = 'active';
+    		setInterval(function(){
+    			//console.log(outerObj.className);
+    			outerObj.className = outerObj.className == 'active' ? '' : 'active';
+    			imgObj.src = imgGroup[count];
+    			if (count == imgGroup.length -1 ){
+    				count = 0;
+    			}
+    			else{
+    				count = count + 1;
+    			}
+    			//outerObj.className = outerObj.className == 'active' ? '' : 'active';
+    		},2000);
+
+    	}
+    	$("#video_btn").on("click", function() {
+			 beginPlay();
+		})
+    	
+    	addEventListener('load',function()
+		{
+    	//document.getElementById('outer').className = 'active'
+		})
+    </script>
+</body>
+ 
+</html>
+
