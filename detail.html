@@ -10,20 +10,20 @@
   	<style>
 		html,body{width:100%;height:100%;margin:0}
 
-		.img
-		{
-			-webkit-transform: scale(1.2);
-			-ms-transform: scale(1.2);
-			transform: scale(1.2);
-
-		}
-		.active .img
+		.banner
 		{
 			-webkit-transform: scale(1);
 			-ms-transform: scale(1);
 			transform: scale(1);
-			-webkit-transition: -webkit-transform 2s linear 0s;
-			transition: transform 2s linear 0s;
+
+		}
+		img.active 
+		{
+			-webkit-transform: scale(1.2);
+			-ms-transform: scale(1.2);
+			transform: scale(1.2);
+			-webkit-transition: -webkit-transform 5s linear 0s;
+			transition: transform 5s linear 0s;
 		}
 		#outer
 		{
@@ -52,41 +52,46 @@
  
 <body>
     <div id="outer">
-    	<img src="images/1.jpg" id="inner" class="img">
+    	<div id="inner">
+    		<img src="images/1.jpg"  class="banner">
+    		<img src="images/2.jpg"  class="banner">
+    		<img src="images/3.jpg"  class="banner">
+    		<img src="images/4.jpg"  class="banner">
+    	</div>
     	<div id="video_btn">
 			<img src="images/playerBtn.png" />
 		</div>
 	</div>
     <script>
-    	var imgGroup = new Array("images/1.jpg","images/2.jpg","images/3.jpg","images/4.jpg");
-    	var imgObj = document.getElementById('inner');
-    	var outerObj = document.getElementById('outer');
-    	var count = 0;
+    	//var g_imgGroup = new Array("images/1.jpg","images/2.jpg","images/3.jpg","images/4.jpg");
+    	var g_imgObj = $("#inner img");
+    	var g_length = g_imgObj.length;
+    	var g_count = 0;
+    	function expand() {
+    		g_imgObj.eq(g_count).show().siblings().hide();
+    		g_imgObj.eq(g_count).addClass('active').siblings().removeClass('active');
+
+ 			if (g_count < g_length - 1){
+ 				setTimeout(expand,2000);
+ 			}
+ 			else{
+ 				setTimeout(function(){
+ 					$("#video_btn").show();
+ 				},5000);
+ 			}
+ 			g_count = g_count + 1;
+    	}
     	function beginPlay(){
     		$("#video_btn").hide();
-    		outerObj.className = 'active';
-    		setInterval(function(){
-    			//console.log(outerObj.className);
-    			outerObj.className = outerObj.className == 'active' ? '' : 'active';
-    			imgObj.src = imgGroup[count];
-    			if (count == imgGroup.length -1 ){
-    				count = 0;
-    			}
-    			else{
-    				count = count + 1;
-    			}
-    			//outerObj.className = outerObj.className == 'active' ? '' : 'active';
-    		},2000);
-
+    		g_count = 0;
+    		expand();
+    		//setInterval(expand,2000);
     	}
     	$("#video_btn").on("click", function() {
 			 beginPlay();
 		})
     	
-    	addEventListener('load',function()
-		{
-    	//document.getElementById('outer').className = 'active'
-		})
+ 
     </script>
 </body>
  
