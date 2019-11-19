@@ -10,6 +10,26 @@
   	<style>
 		html,body{width:100%;height:100%;margin:0}
 
+		
+
+		#zone_content{
+			width: 2408px;
+			height: 500px;
+	
+			position: relative;
+		}
+
+		#video_zone
+		{
+    		text-align:center;
+    		width:800px;
+    		height:400px;
+    		position: absolute;
+    		overflow: hidden;
+    		z-index: 1;
+		}
+
+
 		.banner
 		{
 			-webkit-transform: scale(1);
@@ -25,43 +45,118 @@
 			-webkit-transition: -webkit-transform 5s linear 0s;
 			transition: transform 5s linear 0s;
 		}
-		#outer
-		{
-    		text-align:center;
-    		width:800px;
-    		height:400px;
-    		position: relative;
-    		overflow: hidden;
-		}
 
 		#inner img{
     		width:800px;
     		height:400px;
 		}
-		#video_btn {
+		#video_btn{
+			width: 200px;
+			height: 200px;
+			z-index: 2;
+
 			position: absolute;
+		}
+		#video_btn img{
+			/*position: absolute;
 			left: 0;
 			top: 0;
 			bottom: 0;
 			right: 0;
-			margin: auto;
+			z-index: 1000;
+			margin: auto;*/
+	
+			
 		}
+		
+
+		#figure_zone
+		{
+    		text-align:center;
+    		width:800px;
+    		height:400px;
+    		position: absolute;
+    		z-index: 0;
+		}
+
+		#small_pic img{
+			width: 300px;
+			height: 150px;
+			float: left;
+		}
+
+		#pic_box{
+			width: 200px;
+			height: 50px;
+		}
+		ul#flash_btn li img {
+			width: 50px;
+			height: 50px;
+		}
+
+		.vAndi{
+			width: 100px;
+			height: 50px;
+			margin: 100px;
+		}
+
+		.videoBtn.SWactive {
+			background: #FE3F47;
+			color: #fff;
+		}
+
+		.imgBtn.SWactive {
+			background: #FE3F47;
+			color: #fff;
+		}
+
 	</style>
         
 </head>
  
 <body>
-    <div id="outer">
-    	<div id="inner">
-    		<img src="images/1.jpg"  class="banner">
-    		<img src="images/2.jpg"  class="banner">
-    		<img src="images/3.jpg"  class="banner">
-    		<img src="images/4.jpg"  class="banner">
-    	</div>
-    	<div id="video_btn">
+	<div id="zone_content">
+    	<div id="video_zone">
+    		<div id="inner">
+    			<img src="images/1.jpg"  class="banner">
+    			<img src="images/2.jpg"  class="banner">
+    			<img src="images/3.jpg"  class="banner">
+    			<img src="images/4.jpg"  class="banner">
+    		</div>
+		</div>
+		<div id="video_btn">
 			<img src="images/playerBtn.png" />
 		</div>
+
+		<div id="figure_zone" >
+			<div id="small_pic">
+				<img src="images/1.jpg"  class="banner" >
+			</div>
+			<div id="big_pic">
+
+			</div>
+			<div id="pic_box">
+				<ul id="flash_btn">
+					<li><img src="images/1.jpg"></li>
+					<li><img src="images/2.jpg"></li>
+					<li><img src="images/3.jpg"></li>
+					<li><img src="images/4.jpg"></li>
+				</ul>
+			</div>
+		</div>
 	</div>
+
+	<div class="vAndi">
+		<div class="vAndiCont">
+			<div class="videoBtn SWactive">
+				Video
+			</div>
+			<div class="imgBtn">
+				Image
+			</div>
+		</div>
+	</div>
+
     <script>
     	//var g_imgGroup = new Array("images/1.jpg","images/2.jpg","images/3.jpg","images/4.jpg");
     	var g_imgObj = $("#inner img");
