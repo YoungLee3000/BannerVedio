@@ -42,8 +42,8 @@
 			-webkit-transform: scale(1.2);
 			-ms-transform: scale(1.2);
 			transform: scale(1.2);
-			-webkit-transition: -webkit-transform 5s linear 0s;
-			transition: transform 5s linear 0s;
+			-webkit-transition: -webkit-transform 2s linear 0s;
+			transition: transform 2s linear 0s;
 		}
 
 		#inner img{
@@ -162,19 +162,27 @@
     	var g_imgObj = $("#inner img");
     	var g_length = g_imgObj.length;
     	var g_count = 0;
+    	var g_timer = null;
     	function expand() {
-    		g_imgObj.eq(g_count).show().siblings().hide();
-    		g_imgObj.eq(g_count).addClass('active').siblings().removeClass('active');
-
- 			if (g_count < g_length - 1){
- 				setTimeout(expand,2000);
+    		clearTimeout(g_timer);
+    		if ($("#video_zone").css("display") == 'none' ) return;
+    		if ($("#video_zone").css("display") != 'none' && $("#video_btn").css("display") != 'none' ) return;
+  			
+ 			if (g_count < g_length ){
+ 				g_imgObj.eq(g_count).show().siblings().hide();
+    			g_imgObj.eq(g_count).addClass('active').siblings().removeClass('active');
+ 				g_count = g_count + 1;
+ 				if (g_count == g_length){
+ 					g_timer = setTimeout(function(){
+ 					if ($("#video_zone").css("display") != 'none') $("#video_btn").show();
+ 					},2000);
+ 				}
+ 				else{
+ 					g_timer = setTimeout(expand,2000);
+ 				}	
  			}
- 			else{
- 				setTimeout(function(){
- 					$("#video_btn").show();
- 				},5000);
- 			}
- 			g_count = g_count + 1;
+ 			
+ 			
     	}
     	function beginPlay(){
     		$("#video_btn").hide();
@@ -184,6 +192,25 @@
     	}
     	$("#video_btn").on("click", function() {
 			 beginPlay();
+		})
+
+		$(".videoBtn").on("click",function(){
+			$(".videoBtn").addClass("SWactive");
+			$(".imgBtn").removeClass("SWactive");
+			$("#video_zone").show();
+			$("#video_btn").show();
+			$("#figure_zone").hide();
+		})
+
+		$(".imgBtn").on("click",function(){
+			$(".videoBtn").removeClass("SWactive");
+			$(".imgBtn").addClass("SWactive");
+			$("#video_zone").hide();
+			$("#video_btn").hide();
+			$("#figure_zone").show();
+			clearTimeout(g_timer);
+			g_imgObj.eq(g_count).removeClass('active').siblings().removeClass('active');
+    		g_imgObj.eq(g_count).show().siblings().show();
 		})
     	
  
